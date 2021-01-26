@@ -1,13 +1,13 @@
 <div *ngIf="(OnlineCheck | async) as onlineReady; else myonlineNotReady">
   <div fxLayoutAlign="center center" style="height:100vh;">
     Online
-</div>
+  </div>
 </div>
 <ng-template #myonlineNotReady>
-  <div *ngIf="(myonline | async)==false">
 
-      <div fxLayoutAlign="center center" style="height:100vh;">
-          Lost Internet Connection!
-      </div>
+
+  <div fxLayoutAlign="center center" style="height:100vh;">
+    Lost Internet Connection!
+
   </div>
 </ng-template>
