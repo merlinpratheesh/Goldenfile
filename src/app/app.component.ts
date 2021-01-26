@@ -17,6 +17,7 @@ export class AppComponent {
   getObservableonline = (localonline: Observable<boolean>) => {
     this.getObservableonlineSub?.unsubscribe();
     this.getObservableonlineSub = localonline.subscribe((valOnline: any) => {
+      console.log(valOnline);
       this.subjectonline.next(valOnline);
     });
     return this.subjectonline;
@@ -27,10 +28,18 @@ export class AppComponent {
   {
     this.myonline = this.getObservableonline(this.developmentservice.isOnline$);
     this.OnlineCheck = this.myonline.pipe(
-      switchMap((onlineval: any) => {
-        if (onlineval === false) 
-        alert('check internet Connection');
-        return of(onlineval);
+      map((onlineval: any) => {
+        if(onlineval === false) 
+        {
+          //alert('check internet Connection');
+        }
+        else
+        {
+          //alert('good Connection');
+        }
+        
+
+        return (onlineval);
       }));
 
   }
