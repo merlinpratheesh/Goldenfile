@@ -14,6 +14,10 @@ import { projectControls,UserdataService } from './service/userdata.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnDestroy {
+  showList = true;
+  collection = ['Name:merlin', 'E-mail:Some', 'Gender:Male','Area of Interest:Angular','Skils:Projects'];
+
+
   @ViewChild(MatAccordion) accordion: MatAccordion;
 
   @Input() profileinfoUid: firebase.User;
@@ -66,5 +70,6 @@ export class AppComponent implements OnDestroy {
     this.publicProjsel.unsubscribe();
     this.getPublicListSubscription?.unsubscribe();
   }
+
 
 }

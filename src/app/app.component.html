@@ -1,34 +1,98 @@
-<div fxLayout="column">
-  <mat-toolbar class="header" color="warn">
-      <div>Public Projects</div>
-      <span fxFlex="grow"></span>
-  </mat-toolbar>
-  <cdk-virtual-scroll-viewport itemSize="100" class="scroll-viewport">
-      <mat-accordion class="example-headers-align" multi>
-          <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
-              <mat-expansion-panel *ngFor="let public of publicList | async" cdkDrag>
-                  <mat-expansion-panel-header>
-                      <mat-panel-title>
-                          {{public.ProjectName}}
-                      </mat-panel-title>
-                      <mat-panel-description>
+<mat-toolbar color="primary">
+    <h1>
+        StepsWise Tracking Tool
+    </h1>
+    <span fxFlex="grow"></span>
+    <div fxHide.lt-sm>
+        Welcome
+    </div>
+</mat-toolbar>
+<mat-grid-list cols="10" rowHeight="50vh">
 
-                        {{public.Name}}
-                          <mat-icon>account_circle</mat-icon>
-                      </mat-panel-description>
-                  </mat-expansion-panel-header>
+    <mat-grid-tile colspan="2" rowspan="2" [style.background]="'#F2F3F5'">
+        <mat-card class="example-card" fxFlex="20vw" fxFlex.lt-sm="40vw">
 
-                  <div>
-                    {{public.Description}}
-                  </div>
-                  <mat-divider></mat-divider>
+            <div style="color:#216fdb;  padding:0px; margin:0px" fxLayout="row">
+                <div>
+                    <h1> Analayze all the Steps of a Task </h1>
+                    <h1> Record all the Steps for Easy Tracking </h1>
 
-              </mat-expansion-panel>
-              </div>
-      </mat-accordion>
+                    <div fxLayout="column">
+                        <mat-chip-list>
+                            <mat-chip
+                                style="font-size:1.5em; cursor:none; opacity:.6; background-color:#F2F3F5;color: red; padding:10px;height: 60px !important;">
+                                Start Tasking!!</mat-chip>
+                        </mat-chip-list>
 
-  </cdk-virtual-scroll-viewport>
-  <!-- Copyright 2020 Google LLC. All Rights Reserved.
-      Use of this source code is governed by an MIT-style license that
-      can be found in the LICENSE file at http://angular.io/license -->
-</div>
+                    </div>
+                </div>
+            </div>
+
+        </mat-card>
+
+
+    </mat-grid-tile>
+    <mat-grid-tile colspan="6" rowspan="2" [style.background]="'#F2F3F5'">
+        <div class="header" color="#216fdb">
+            <div>PublicProjects</div>
+            <span fxFlex="primary"></span>
+        </div>
+        <mat-list class="listitem" role="list">
+            <mat-list-item role="listitem">
+
+                <cdk-virtual-scroll-viewport itemSize="100" class="scroll-viewport">
+                    <mat-accordion class="example-headers-align" multi>
+                        <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
+                            <mat-expansion-panel *ngFor="let public of publicList | async" cdkDrag>
+                                <mat-expansion-panel-header>
+                                    <mat-panel-title>
+                                        {{public.ProjectName}}
+                                    </mat-panel-title>
+
+                                    <mat-panel-description style="margin-left:200px">
+
+                                        {{public.OwnerName}}
+                                    </mat-panel-description>
+                                </mat-expansion-panel-header>
+
+                                <div>
+                                    {{public.Description}}
+                                </div>
+                                <mat-icon>account_circle</mat-icon><br>
+
+                                <app-list [collection]="collection" *ngIf="showList">
+                                    <ng-template #profileTemplate>
+                                        <app-profile *ngFor="let item of collection" [item]="item"></app-profile>
+                                    </ng-template>
+                        
+                                    <ng-template #keysTemplate>
+                                        <app-keys *ngFor="let item of collection" [item]="item"></app-keys>
+                                    </ng-template>
+                                </app-list>
+
+                                <mat-divider></mat-divider>
+
+                            </mat-expansion-panel>
+                        </div>
+                    </mat-accordion>
+
+                </cdk-virtual-scroll-viewport>
+            </mat-list-item>
+        </mat-list>
+
+
+    </mat-grid-tile>
+    <mat-grid-tile colspan="2" rowspan="2" [style.background]="'#F2F3F5'">
+        <app-list [collection]="collection" *ngIf="showList">
+            <ng-template #profileTemplate>
+                <app-profile *ngFor="let item of collection" [item]="item"></app-profile>
+            </ng-template>
+
+            <ng-template #keysTemplate>
+                <app-keys *ngFor="let item of collection" [item]="item"></app-keys>
+            </ng-template>
+        </app-list>
+
+
+    </mat-grid-tile>
+</mat-grid-list>

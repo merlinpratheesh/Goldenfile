@@ -1,0 +1,14 @@
+<button (click)="mode = 'profile'"> Show Profile</button>
+<button (click)="mode = 'keys'"> Show Keys</button>
+
+<ng-container [ngTemplateOutlet]="profileTemplate"
+              *ngIf="mode === 'profile'">
+</ng-container>
+
+<ng-container [ngTemplateOutlet]="keysTemplate"
+               *ngIf="mode === 'keys'">
+</ng-container>
+<!-- <ng-container *ngFor="let item of collection"
+              [ngTemplateOutlet]="rowTemplate"
+              [ngTemplateOutletContext]="{item: item}">
+</ng-container> -->
