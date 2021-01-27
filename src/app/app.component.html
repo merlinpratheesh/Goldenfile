@@ -1,10 +1,6 @@
-<div *ngIf="(OnlineCheck | async) as onlineReady; else myonlineNotReady">
-  <div fxLayoutAlign="center center" style="height:100vh;">
-    Online
-  </div>
-</div>
-<ng-template #myonlineNotReady>
-  <div fxLayoutAlign="center center" style="height:100vh;">
-    Lost Internet Connection!
-  </div>
-</ng-template>
+
+<button (click)="logout()">Logout</button>
+
+<firebase-ui (signInSuccessWithAuthResult)="successCallback($event)"
+             (signInFailure)="errorCallback($event)"
+             (uiShown)="uiShownCallback()"></firebase-ui>

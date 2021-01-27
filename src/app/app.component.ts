@@ -1,46 +1,35 @@
-import { Component } from '@angular/core';
-import { BehaviorSubject, Observable, of, Subscription } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
-import { UserdataService } from './service/userdata.service';
+import { Component,OnInit } from '@angular/core';
+import {AngularFireAuth} from '@angular/fire/auth';
 
+import {FirebaseUISignInFailure, FirebaseUISignInSuccessWithAuthResult, FirebaseuiAngularLibraryService} from 'firebaseui-angular';
 @Component({
-  selector: 'app-root',
+  selector: 'fbui-ng-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
-  title = 'OnlineAuthOnetap';
-  myonline;
-  subjectonline = new BehaviorSubject(undefined);
-  getObservableonlineSub: Subscription = new Subscription;
+export class AppComponent implements OnInit {
+  constructor(private afAuth: AngularFireAuth, private firebaseuiAngularLibraryService: FirebaseuiAngularLibraryService) {
+  firebaseuiAngularLibraryService.firebaseUiInstance.disableAutoSignIn();
+}
 
-  getObservableonline = (localonline: Observable<boolean>) => {
-    this.getObservableonlineSub?.unsubscribe();
-    this.getObservableonlineSub = localonline.subscribe((valOnline: any) => {
-      console.log(valOnline);
-      this.subjectonline.next(valOnline);
-    });
-    return this.subjectonline;
+    ngOnInit(): void {
+    //this.afAuth.authState.subscribe(d => console.log(d));
   }
-  OnlineCheck: undefined;
-    constructor(
-      public developmentservice: UserdataService)
-  {
-    this.myonline = this.getObservableonline(this.developmentservice.isOnline$);
-    this.OnlineCheck = this.myonline.pipe(
-      map((onlineval: any) => {
-        if(onlineval === false) 
-        {
-          //alert('check internet Connection');
-        }
-        else
-        {
-          //alert('good Connection');
-        }
-        
-
-        return (onlineval);
-      }));
+  successCallback(data: FirebaseUISignInSuccessWithAuthResult) {
+    console.log('successCallback', data);
 
   }
+
+  errorCallback(data: FirebaseUISignInFailure) {
+    console.warn('errorCallback', data);
+  }
+
+  uiShownCallback() {
+    console.log('UI shown');
+  }
+  
+  logout() {
+    this.afAuth.signOut();
+  }
+
 }

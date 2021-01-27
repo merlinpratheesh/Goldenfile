@@ -4,13 +4,19 @@
   <meta charset="utf-8">
   <title>Goldenfile</title>
   <base href="/">
+
+  <script src="node_modules/firebaseui/dist/firebaseui.js"></script>
+  <link type="text/scss" rel="stylesheet" href="node_modules/firebaseui/dist/firebaseui.scss" />
+
+  <script src="https://www.gstatic.com/firebasejs/ui/4.7.0/firebase-ui-auth__{LANGUAGE_CODE}.js"></script>
+<link type="text/scss" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.7.0/firebase-ui-auth.scss" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
 </head>
 <body class="mat-typography">
+  <fbui-ng-root></fbui-ng-root>
   <app-root></app-root>
 </body>
 </html>
