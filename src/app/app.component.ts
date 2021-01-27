@@ -13,7 +13,7 @@ import { projectControls,UserdataService } from './service/userdata.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit,AfterViewInit,OnDestroy {
+export class AppComponent implements OnDestroy {
   @ViewChild(MatAccordion) accordion: MatAccordion;
 
   @Input() profileinfoUid: firebase.User;
@@ -38,18 +38,14 @@ export class AppComponent implements OnInit,AfterViewInit,OnDestroy {
         } else {
           this.localpublicList = val.public;
           this.getPublicListBehaviourSub.next(val.public);
+          console.log(val.public);
         }
       }
     });
     return this.getPublicListBehaviourSub;
   };
-
-  constructor(    public developmentservice: UserdataService,private db: AngularFirestore) { }
-  publicProjsel:Subscription;
-
-  ngOnInit(): void {
-  }
-  ngAfterViewInit(){
+  publicProjsel: Subscription;
+  constructor(    public developmentservice: UserdataService,private db: AngularFirestore) { 
     this.publicProjsel = this.myprojectControls.publicprojectControl.valueChanges.pipe(
       startWith(''),
       map((publicProjectSelected: string) => {
