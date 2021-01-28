@@ -22,7 +22,7 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
         // This can be obtained from the Credentials page of the Google APIs
         // console. Use the same OAuth client ID used for the Google provider
         // configured with GCIP or Firebase Auth.
-        clientId: '808980311188-01cto2l474b38hrrji19nh9de80a11se.apps.googleusercontent.com'
+        clientId: '808980311188-tsdv14grk5g7q0r8148up0ii8h2gf2f3.apps.googleusercontent.com'
         
       }],
   
