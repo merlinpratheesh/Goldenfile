@@ -1,6 +1,11 @@
 import { Injectable } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { fromEvent, merge, Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
+
+export interface projectControls {
+  publicprojectControl?: FormControl;//1-User selects a public project    
+}
 
 @Injectable({
   providedIn: 'root'
@@ -8,14 +13,10 @@ import { map } from 'rxjs/operators';
 
 export class UserdataService {
 
-  isOnline$!: Observable<boolean>;
+ 
 
 
   constructor() {
-    this.isOnline$ = merge(
-      of(null),
-      fromEvent(window, 'online'),
-      fromEvent(window, 'offline')
-    ).pipe(map(() => navigator.onLine));
+ 
    }
 }
