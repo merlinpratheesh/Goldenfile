@@ -32,7 +32,7 @@
 
 
     </mat-grid-tile>
-    <mat-grid-tile colspan="6" rowspan="2" [style.background]="'#F2F3F5'">
+    <mat-grid-tile colspan="4" rowspan="2" [style.background]="'#F2F3F5'">
         <div class="header" color="#216fdb">
             <div>PublicProjects</div>
             <span fxFlex="primary"></span>
@@ -49,26 +49,17 @@
                                         {{public.ProjectName}}
                                     </mat-panel-title>
 
-                                    <mat-panel-description style="margin-left:200px">
+                                    <mat-panel-description fxFlex="10vw" >
 
                                         {{public.OwnerName}}
+                                        <mat-icon>account_circle</mat-icon><br>
+
                                     </mat-panel-description>
                                 </mat-expansion-panel-header>
 
                                 <div>
                                     {{public.Description}}
                                 </div>
-                                <mat-icon>account_circle</mat-icon><br>
-
-                                <app-list [collection]="collection" *ngIf="showList">
-                                    <ng-template #profileTemplate>
-                                        <app-profile *ngFor="let item of collection" [item]="item"></app-profile>
-                                    </ng-template>
-                        
-                                    <ng-template #keysTemplate>
-                                        <app-keys *ngFor="let item of collection" [item]="item"></app-keys>
-                                    </ng-template>
-                                </app-list>
 
                                 <mat-divider></mat-divider>
 
@@ -82,17 +73,10 @@
 
 
     </mat-grid-tile>
-    <mat-grid-tile colspan="2" rowspan="2" [style.background]="'#F2F3F5'">
-        <app-list [collection]="collection" *ngIf="showList">
-            <ng-template #profileTemplate>
-                <app-profile *ngFor="let item of collection" [item]="item"></app-profile>
-            </ng-template>
-
-            <ng-template #keysTemplate>
-                <app-keys *ngFor="let item of collection" [item]="item"></app-keys>
-            </ng-template>
-        </app-list>
-
+    <mat-grid-tile colspan="4" rowspan="2" [style.background]="'#F2F3F5'">
+ <div>
+     Keys
+ </div>
 
     </mat-grid-tile>
 </mat-grid-list>

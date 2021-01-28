@@ -8,14 +8,15 @@ import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 import {ChangeDetectionStrategy} from '@angular/core';
 import { MatAccordion } from '@angular/material/expansion';
 import { projectControls,UserdataService } from './service/userdata.service';
+
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnDestroy {
-  showList = true;
-  collection = ['Name:merlin', 'E-mail:Some', 'Gender:Male','Area of Interest:Angular','Skils:Projects'];
+
 
 
   @ViewChild(MatAccordion) accordion: MatAccordion;

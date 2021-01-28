@@ -11,9 +11,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import {firebase,  FirebaseUIModule} from 'firebaseui-angular';
 import { environment } from 'src/environments/environment';
 import * as firebaseui from 'firebaseui';
-import { ListComponent } from './component/list/list.component';
-import { ProfileComponent } from './component/profile/profile.component';
-import { KeysComponent } from './component/keys/keys.component';
+
 const firebaseUiAuthConfig: firebaseui.auth.Config = {
   signInOptions: [
       {       
@@ -32,7 +30,7 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
     AppRoutingModule,
     BrowserAnimationsModule,
     AppSharedModule,
-    AngularFireModule.initializeApp(environment.firebaseconfig),
+    AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule, // firestore
     AngularFireAuthModule, // auth
     AngularFireStorageModule, // storage
@@ -41,7 +39,7 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
 
   ],
   providers: [],
-    declarations: [ AppComponent,  ListComponent, ProfileComponent, KeysComponent ],
+    declarations: [ AppComponent ],
 
   bootstrap: [AppComponent],
 
