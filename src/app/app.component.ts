@@ -16,12 +16,12 @@ import { projectControls,UserdataService } from './service/userdata.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnDestroy {
+  @Output() profileinfoUid  = new EventEmitter<firebase.User>();
 
 
 
   @ViewChild(MatAccordion) accordion: MatAccordion;
 
-  @Input() profileinfoUid: firebase.User;
   myprojectControls: projectControls = {
     publicprojectControl: new FormControl(null, Validators.required)
   };
