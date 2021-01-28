@@ -1,14 +1,13 @@
 export const environment = {
   production: true,
   firebase : {
-    apiKey: "AIzaSyBg-hLuMoJ_QinJQ2MyUHWJ8-ih7nINCrY",
-    authDomain: "verifytesttool.firebaseapp.com",
-    databaseURL: "https://verifytesttool.firebaseio.com",
-    projectId: "verifytesttool",
-    storageBucket: "verifytesttool.appspot.com",
-    messagingSenderId: "1075525420003",
-    appId: "1:1075525420003:web:427b9e01e93b350fa356d6",
-    measurementId: "G-39E01V32FM"
+    apiKey: "AIzaSyDx45jInu_iyMeqq2lIVPedyI8BfGc3KY0",
+    authDomain: "taskmanagertool-2115a.firebaseapp.com",
+    projectId: "taskmanagertool-2115a",
+    storageBucket: "taskmanagertool-2115a.appspot.com",
+    messagingSenderId: "808980311188",
+    appId: "1:808980311188:web:1292baea31f402ca39d881",
+    measurementId: "G-5DMTYT7LFF"
   }
   
 };

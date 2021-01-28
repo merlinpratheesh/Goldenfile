@@ -3,12 +3,12 @@
     "verifytesttool": {
       "hosting": {
         "Goldenfile": [
-          "verifytesttool"
+          "taskmanagertool-2115a"
         ]
       }
     }
   },
   "projects": {
-    "default": "verifytesttool"
+    "default": "taskmanagertool-2115a"
   }
 }
