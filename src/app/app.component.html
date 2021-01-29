@@ -1,65 +1,47 @@
 <mat-toolbar color="primary">
-  <h1>
-      StepsWise Tracking Tool
-  </h1>
-  <span fxFlex="grow"></span>
-  <div fxHide.lt-sm>
-      Welcome
-  </div>
+    <h1>
+        StepsWise Tracking Tool
+    </h1>
+    <span fxFlex="grow"></span>
+    <div fxHide.lt-sm>
+        Welcome
+    </div>
 </mat-toolbar>
 <mat-grid-list cols="10" rowHeight="50vh">
 
-  <mat-grid-tile colspan="2" rowspan="2" [style.background]="'#F2F3F5'">
+    <mat-grid-tile colspan="2" rowspan="2" [style.background]="'#F2F3F5'">
+        <div *ngIf=" userinfoDetails | async as public  ">
+            <div class="modal">
 
-<app-profileview>
-    
-</app-profileview>
-  </mat-grid-tile>
-  <mat-grid-tile colspan="4" rowspan="2" [style.background]="'#F2F3F5'">
-      <div class="header" color="#216fdb">
-          <div>PublicProjects</div>
-          <span fxFlex="primary"></span>
-      </div>
-      <mat-list class="listitem" role="list">
-          <mat-list-item role="listitem">
+                hello<br>
+                <div class="modal-container">
+                    <div class="user-profile">
+                        <div class="profile">
+                            <p class="name">profileName{{public.profileName}}</p>
+                            <p class="bio-1">Email:{{public.email}}</p>
+                            <p class="bio-2">Gender: {{public.gender}}</p>
+                            <p class="bio-2">Date: {{public.areaOfinterest}}</p>
+                            <p class="bio-2">Skills: {{public.email}}</p>
+                            <p class="bio-2">Location: {{public.location}}</p>
 
-              <cdk-virtual-scroll-viewport itemSize="100" class="scroll-viewport">
-                  <mat-accordion class="example-headers-align" multi>
-                      <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
-                          <mat-expansion-panel *ngFor="let public of publicList | async" cdkDrag>
-                              <mat-expansion-panel-header>
-                                  <mat-panel-title>
-                                      {{public.ProjectName}}
-                                  </mat-panel-title>
-
-                                  <mat-panel-description fxFlex="10vw" >
-
-                                      {{public.OwnerName}}
-                                      <mat-icon>account_circle</mat-icon>
-
-                                  </mat-panel-description>
-                              </mat-expansion-panel-header>
-
-                              <div>
-                                  {{public.Description}}
-                              </div>
-
-                              <mat-divider></mat-divider>
-
-                          </mat-expansion-panel>
-                      </div>
-                  </mat-accordion>
-
-              </cdk-virtual-scroll-viewport>
-          </mat-list-item>
-      </mat-list>
+                            <br>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
 
-  </mat-grid-tile>
-  <mat-grid-tile colspan="4" rowspan="2" [style.background]="'#F2F3F5'">
-<div>
-   Keys
-</div>
+        </div>
 
-  </mat-grid-tile>
+
+    </mat-grid-tile>
+    <mat-grid-tile colspan="4" rowspan="2" [style.background]="'#F2F3F5'">
+
+    </mat-grid-tile>
+    <mat-grid-tile colspan="4" rowspan="2" [style.background]="'#F2F3F5'">
+        <div>
+            Keys
+        </div>
+
+    </mat-grid-tile>
 </mat-grid-list>

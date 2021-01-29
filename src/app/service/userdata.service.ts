@@ -14,10 +14,10 @@ export interface userProfile {
 }
 
 export interface usrinfoDetails {
-  profilename: string,
+  profileName: string,
   email: string,
   gender:string,
-  areasOfInterest:string,
+  areasOfinterest:string,
   skills: string,
   location:string
 }
