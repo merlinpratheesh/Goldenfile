@@ -55,8 +55,8 @@ export class ProfileviewComponent implements OnInit,AfterViewInit,OnDestroy {
         if (val.ownerRecord.length === 0) {
           this.getuserinfoDetailsBehaviourSub.next(null);
         } else {
-          this.localuserinfoDetails = val.userinfo;
-          this.getuserinfoDetailsBehaviourSub.next(val.userinfo);
+          this.localuserinfoDetails = val.uidDetails;
+          this.getuserinfoDetailsBehaviourSub.next(val.uidDetails);
         }
       }
     });
@@ -78,7 +78,7 @@ export class ProfileviewComponent implements OnInit,AfterViewInit,OnDestroy {
       startWith(''),
       map((ProfileviewSelected: string) => {
 
-        this.userinfoDetails = this.getuserinfoDetails(this.db.doc(('/projectList/userDetails/')));
+        this.userinfoDetails = this.getuserinfoDetails(this.db.doc(('/profile/uid/')));
         console.log(this.userinfoDetails);
 
 
