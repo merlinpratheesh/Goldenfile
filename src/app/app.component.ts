@@ -7,7 +7,7 @@ import { map, switchMap, startWith, withLatestFrom } from 'rxjs/operators';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { ChangeDetectionStrategy } from '@angular/core';
 import { MatAccordion } from '@angular/material/expansion';
-import { projectControls, UserdataService, userProfile, usrinfoDetails } from './service/userdata.service';
+import { MainSectionGroup, projectControls, UserdataService, userProfile, usrinfoDetails } from './service/userdata.service';
 
 
 @Component({
@@ -17,14 +17,17 @@ import { projectControls, UserdataService, userProfile, usrinfoDetails } from '.
 })
 export class AppComponent implements OnDestroy {
 
-
   myuserProfile: userProfile = {
     userAuthenObj: null,//Receive User obj after login success
-
+    myusrinfoFromDb: null
   };
 
   myprojectControls: projectControls = {
+    projectkeysControl: new FormControl(null, Validators.required),
+    publicprojectControl: new FormControl(null, Validators.required),
     userdetailsprojectControl: new FormControl(null, Validators.required)
+
+
 
   }
   myusrinfoDetails: usrinfoDetails = {
@@ -36,8 +39,7 @@ export class AppComponent implements OnDestroy {
     location: ''
   };
 
-
-  userinfoDetails = of(undefined);
+  userinfoDetails : any;
   localuserinfoDetails = [];
   getuserinfoDetailsSubscription: Subscription;
   getuserinfoDetailsBehaviourSub = new BehaviorSubject(undefined);
@@ -61,30 +63,107 @@ export class AppComponent implements OnDestroy {
     });
     return this.getuserinfoDetailsBehaviourSub;
   };
-  userinfo: Subscription;
 
-  constructor(public developmentservice: UserdataService, private db: AngularFirestore) { 
+  publicList : any;
+  localpublicList = [];
+  getPublicListSubscription: Subscription;
+  getPublicListBehaviourSub = new BehaviorSubject(undefined);
+  getPublicList = (publicProjects: AngularFirestoreDocument<any>) => {
+    if (this.getPublicListSubscription !== undefined) {
+      this.getPublicListSubscription.unsubscribe();
+    }
+    this.getPublicListSubscription = publicProjects.valueChanges().subscribe((val: any) => {
+      if (val === undefined) {
+        this.getPublicListBehaviourSub.next(undefined);
+      } else {
+        if (val.public.length === 0) {
+          this.getPublicListBehaviourSub.next(null);
+        } else {
+          this.localpublicList = val.public;
+          this.getPublicListBehaviourSub.next(val.public);
+          console.log(val.public);
+        }
+      }
+    });
+    return this.getPublicListBehaviourSub;
+  };
+  Sections: any;
+  getSectionsSubscription: Subscription;
+  getSectionsBehaviourSub = new BehaviorSubject(undefined);
+  getSections = (MainAndSubSectionkeys: AngularFirestoreDocument<MainSectionGroup>) => {
+    if (this.getSectionsSubscription !== undefined) {
+      this.getSectionsSubscription.unsubscribe();
+    }
+    this.getSectionsSubscription = MainAndSubSectionkeys.valueChanges().subscribe((val: any) => {
+      if (val === undefined) {
+        this.getSectionsBehaviourSub.next(undefined);
+      } else {
+        console.log(val);
+        if (val.mainSection.length === 0) {
+          this.getSectionsBehaviourSub.next(null);
+        } else {
+          console.log(val.mainSection)
+          if (val.mainSection.length !== 0) {
+            this.getSectionsBehaviourSub.next(val.mainSection);
+          }
+        }
+      }
+    });
+    return this.getSectionsBehaviourSub;
+  };
 
+  projectkeys: Subscription;
+  publicProjsel: Subscription;
+  userinfo:Subscription;
+  publicProjectSelected: any;
 
-    this.userinfo = this.myprojectControls.userdetailsprojectControl.valueChanges.pipe(
+  constructor(public developmentservice: UserdataService, private db: AngularFirestore) {
+
+    this.userinfo =this.myprojectControls.userdetailsprojectControl.valueChanges.pipe(
       startWith(''),
       map((ProfileviewSelected: string) => {
         if (!ProfileviewSelected || ProfileviewSelected === '') {
-          this.localuserinfoDetails = [];
-          this.getuserinfoDetailsSubscription?.unsubscribe();
           this.userinfoDetails = this.getuserinfoDetails(this.db.doc(('/profile/uid')));
-          console.log(this.userinfoDetails);
 
           return ProfileviewSelected;
         }
-        })).subscribe(_ => {
+      })).subscribe(_ => {
+      });
 
-        });
+    this.projectkeys = this.myprojectControls.projectkeysControl.valueChanges.pipe(
+      startWith(''),
+      map((KeySelected: string) => {
+        if (!KeySelected || KeySelected === '') {
+          this.Sections = this.getSections(this.db.doc(('/projectKeys/keys')));
+          return KeySelected;
+        }
+      })).subscribe(_ => {
+      });
+
+    this.publicProjsel = this.myprojectControls.publicprojectControl.valueChanges.pipe(
+      startWith(''),
+      map((publicProjectSelected: string) => {
+        if (!publicProjectSelected || publicProjectSelected === '') {
+          this.getPublicListSubscription?.unsubscribe();
+          this.publicList = this.getPublicList(this.db.doc(('/projectList/publicProjects')));
+          this.userinfoDetails.uid=this.publicProjectSelected.projectsUid;
+          this.Sections.keys=this.publicProjectSelected.ProjectName;
+
+          return publicProjectSelected;
+        }
+      })).subscribe(_ => {
+      });
   }
 
   ngOnDestroy() {
     this.userinfo.unsubscribe();
-    this.getuserinfoDetailsSubscription?.unsubscribe();
+    this.publicProjsel.unsubscribe();
+    this.projectkeys.unsubscribe();
+    this.getuserinfoDetailsSubscription?.unsubscribe()
+    this.getPublicListSubscription?.unsubscribe();
+    this.getSectionsBehaviourSub?.unsubscribe();
   }
-
+  drop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.localpublicList, event.previousIndex, event.currentIndex);
+  }
 }
