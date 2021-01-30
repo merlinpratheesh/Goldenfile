@@ -9,12 +9,18 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
-import { environment } from '../environments/environment'
+import { environment } from '../environments/environment';
+import { ProfileComponent } from './profile/profile.component';
+import { KeyComponent } from './key/key.component';
+import { PublicComponent } from './public/public.component'
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ProfileComponent,
+    KeyComponent,
+    PublicComponent
   ],
   imports: [
     BrowserModule,
