@@ -1,0 +1,36 @@
+<div class="header" color="#216fdb">
+    <div>PublicProjects</div>
+    <span fxFlex="primary"></span>
+</div>
+<mat-list class="listitem" role="list">
+    <mat-list-item role="listitem">
+        <cdk-virtual-scroll-viewport itemSize="100" class="scroll-viewport">
+            <mat-accordion class="example-headers-align" multi>
+                <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
+                    <mat-expansion-panel *ngFor="let public of publicList | async" cdkDrag>
+                        <mat-expansion-panel-header (click)="changeProjectandKey()">
+                            <mat-panel-title>
+                                {{public.ProjectName}}
+                            </mat-panel-title>
+
+                            <mat-panel-description fxFlex="10vw">
+
+                                {{public.OwnerName}}
+                                <mat-icon>account_circle</mat-icon>
+
+                            </mat-panel-description>
+                        </mat-expansion-panel-header>
+
+                        <div>
+                            {{public.Description}}
+                        </div>
+
+                        <mat-divider></mat-divider>
+
+                    </mat-expansion-panel>
+                </div>
+            </mat-accordion>
+
+        </cdk-virtual-scroll-viewport>
+    </mat-list-item>
+</mat-list>
