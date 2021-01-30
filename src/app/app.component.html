@@ -1,3 +1,5 @@
+
+
 <mat-toolbar color="primary">
   <h1>
       StepsWise Tracking Tool
@@ -7,18 +9,17 @@
       Welcome
   </div>
 </mat-toolbar>
-<mat-grid-list cols="10" rowHeight="50vh">
+<mat-grid-list  *ngIf=" (mydata | async) as public " cols="10" rowHeight="50vh" >
 
   <mat-grid-tile colspan="2" rowspan="2" [style.background]="'#F2F3F5'">
-    <button>Login</button>
+    <app-profile [profile]="public.profileinfo"></app-profile>
+  </mat-grid-tile>
+  <mat-grid-tile colspan="4" rowspan="2" [style.background]="'#F2F3F5'">
+    <app-public (projctsDetails)="projctDetails($event)"></app-public>
+  </mat-grid-tile>
 
-    <app-profile ></app-profile>
-  </mat-grid-tile>
   <mat-grid-tile colspan="4" rowspan="2" [style.background]="'#F2F3F5'">
-    <app-public></app-public>
-  </mat-grid-tile>
-  <mat-grid-tile colspan="4" rowspan="2" [style.background]="'#F2F3F5'">
-<app-key></app-key>
+<app-key [key]="public.key"></app-key>
   </mat-grid-tile>
 
 </mat-grid-list>

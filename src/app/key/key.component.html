@@ -1,5 +1,5 @@
 <div >
-    <div class="bio-1" *ngFor="let group of Sections | async">
+    <div class="bio-1" *ngFor="let group of key ">
         MainSection: {{group.name}}<br>
         Visiblity: {{group.disabled}}<br>
         <div *ngFor="let subsec of group.section">

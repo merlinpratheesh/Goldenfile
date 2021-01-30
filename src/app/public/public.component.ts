@@ -18,7 +18,7 @@ import { docData } from 'rxfire/firestore';
   styleUrls: ['./public.component.scss']
 })
 export class PublicComponent implements OnInit {
-  @Output() projectDetails = new EventEmitter;
+  @Output() projctsDetails = new EventEmitter;
 
 
 
@@ -48,8 +48,9 @@ export class PublicComponent implements OnInit {
           this.getPublicListBehaviourSub.next(null);
         } else {
           this.localpublicList = val.public;
-          this.getPublicListBehaviourSub.next(val.public);
           console.log(val.public);
+          this.getPublicListBehaviourSub.next(val.public);
+
         }
       }
     });
@@ -57,51 +58,22 @@ export class PublicComponent implements OnInit {
   };
 
 
-  publicProjsel: Subscription;
-  aftersel;
+  
   constructor(public developmentservice: UserdataService, private db: AngularFirestore) {
-    this.publicProjsel = this.myprojectControls.publicprojectControl.valueChanges.pipe(
-      startWith(''),
-      map((publicProjectSelected: any) => {
-        if (!publicProjectSelected || publicProjectSelected === '') {
-          this.getPublicListSubscription?.unsubscribe();
-          this.publicList = this.getPublicList(this.db.doc(('/projectList/publicProjects')));
-          return publicProjectSelected;
-        }
-      })).subscribe(_ => {
-      });
+
+    this.publicList = this.getPublicList(this.db.doc(('/projectList/publicProjects')));
+
   }
 
-  uid = 'uid';
-  projectname = 'keys';
-  ref;
-  keyref;
-  
-  mydata;
 
-  projctsDetails(some) {
-    console.log(some);
-    this.ref = this.db.firestore.doc('profile/' + some.projectsUid);
-    this.keyref = this.db.firestore.doc('projectKeys/' + some.projectName);
-
-    this.mydata = docData(this.ref).pipe(
-      withLatestFrom(docData(this.keyref)),
-      map((values: any) => {
-        const [profileinfo, keyinfo] = values;
-        return {
-          profile: profileinfo.uidDetails,
-          key: keyinfo.mainSection
-        }
-
-      }));
-
-
+  projectsDetails(some) {
+    console.log('86', some);
+    this.projctsDetails.emit({ ref: some.projectsUid, keyref: some.projectName })
   }
 
   ngOnInit(): void {
   }
   ngOnDestroy() {
-    this.publicProjsel.unsubscribe();
     this.getPublicListSubscription?.unsubscribe();
   }
   drop(event: CdkDragDrop<string[]>) {

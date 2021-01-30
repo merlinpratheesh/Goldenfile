@@ -4,31 +4,42 @@
     <div>PublicProjects</div>
     <span fxFlex="primary"></span>
 </div>
-hello
 
+
+<div *ngIf ="(publicList | async) as projectDetails">
+    <div *ngFor="let details of projectDetails">
+        {{details.projectName | json}}<br>
+        {{details.projectsUid | json}}<br>
+        {{details.description | json}}<br>
+
+    </div>
+</div>
 <mat-list class="listitem" role="list">
     <mat-list-item role="listitem">
         <cdk-virtual-scroll-viewport itemSize="100" class="scroll-viewport">
-            <mat-accordion  class="example-headers-align" >
+            <mat-accordion  class="example-headers-align" *ngIf ="(publicList | async) as projectDetails">
                 <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
-                    <mat-expansion-panel 
-                        *ngFor="let public of publicList | async" cdkDrag>
-                        <mat-expansion-panel-header class="mybutton" (click)="projctsDetails(public)">
+                    <mat-expansion-panel               
+                        *ngFor="let details of projectDetails"  cdkDrag>
+
+                        <mat-expansion-panel-header class="mybutton" (click)="projectsDetails(details)">
                             <mat-panel-title>
-                                {{public.projectName}}
+                                {{details.projectName}}
                             </mat-panel-title>
 
                             <mat-panel-description fxFlex="10vw">
 
-                                {{public.OwnerName}}
+                                {{details.projectsUid}}
                                 <mat-icon>account_circle</mat-icon>
 
                             </mat-panel-description>
                         </mat-expansion-panel-header>
-
+                        <mat-expansion-panel (opened)="panelOpenState = true"
+                        (closed)="panelOpenState = false">
                         <div>
-                            {{public.description}}
+                            {{details.description}}
                         </div>
+                    </mat-expansion-panel>
 
                        
 
@@ -37,10 +48,7 @@ hello
                     </mat-expansion-panel>
                 </div>
             </mat-accordion>
-            <div>
-                {{(mydata| async)?.key | json}}
-
-            </div>
+            
         </cdk-virtual-scroll-viewport>
     </mat-list-item>
 </mat-list>

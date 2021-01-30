@@ -1,17 +1,17 @@
 <p>profile works!</p>
-<div *ngIf=" userinfoDetails | async as public  ">
+<div>
     <div class="modal">
         <h2 class="name">Profile</h2>
         <br>
         <div class="modal-container">
             <div   class="profile">
                 <p> PHOTO</p>
-                <p class="name">{{public.profileName}}</p>
-                <p class="bio-1">Email:{{public.email}}</p>
-                <p class="bio-2">Gender: {{public.gender}}</p>
-                <p class="bio-2">Date: {{public.areaOfinterest}}</p>
-                <p class="bio-2">Skills: {{public.skills}}</p>
-                <p class="bio-2">Location: {{public.location}}</p>
+                <p class="name">{{profile?.profileName}}</p>
+                <p class="bio-1">Email:{{profile?.email}}</p>
+                <p class="bio-2">Gender: {{profile?.gender}}</p>
+                <p class="bio-2">AreaOfinterest: {{profile?.areaOfinterest}}</p>
+                <p class="bio-2">Skills: {{profile?.skills}}</p>
+                <p class="bio-2">Location: {{profile?.location}}</p>
 
                 <br>
             </div>

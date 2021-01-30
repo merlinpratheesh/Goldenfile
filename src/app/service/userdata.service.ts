@@ -43,7 +43,7 @@ export interface usrinfoDetails {
   profileName: string,
   email: string,
   gender:string,
-  areasOfinterest:string,
+  areaOfinterest:string,
   skills: string,
   location:string
 }
