@@ -11,6 +11,8 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import {firebase,  FirebaseUIModule} from 'firebaseui-angular';
 import { environment } from 'src/environments/environment';
 import * as firebaseui from 'firebaseui';
+import { ProfileComponent } from './profile/profile.component';
+import { KeyComponent } from './key/key.component';
 
 
 const firebaseUiAuthConfig: firebaseui.auth.Config = {
@@ -40,7 +42,7 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
 
   ],
   providers: [],
-    declarations: [ AppComponent],
+    declarations: [ AppComponent, ProfileComponent, KeyComponent],
 
   bootstrap: [AppComponent],
 
