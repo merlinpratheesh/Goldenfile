@@ -5,12 +5,13 @@
 <mat-list class="listitem" role="list">
     <mat-list-item role="listitem">
         <cdk-virtual-scroll-viewport itemSize="100" class="scroll-viewport">
-            <mat-accordion class="example-headers-align" multi>
+            <mat-accordion  class="example-headers-align" >
                 <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
-                    <mat-expansion-panel *ngFor="let public of publicList | async" cdkDrag>
-                        <mat-expansion-panel-header (click)="changeProjectandKey()">
+                    <mat-expansion-panel 
+                        *ngFor="let public of publicList | async" cdkDrag>
+                        <mat-expansion-panel-header class="mybutton" (click)="projctsDetails(public)">
                             <mat-panel-title>
-                                {{public.ProjectName}}
+                                {{public.projectName}}
                             </mat-panel-title>
 
                             <mat-panel-description fxFlex="10vw">
@@ -22,7 +23,7 @@
                         </mat-expansion-panel-header>
 
                         <div>
-                            {{public.Description}}
+                            {{public.description}}
                         </div>
 
                         <mat-divider></mat-divider>

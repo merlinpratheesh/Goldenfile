@@ -1,7 +1,10 @@
-<div class="bio-1" *ngFor ="let group of Sections | async">
-    MainSection: {{group.name}}<br>
-    Visiblity: {{group.disabled}}<br>
-    <div *ngFor="let subsec of group.section">
-        {{subsec.viewValue}}
- 
-</div></div>
+<div >
+    <div class="bio-1" *ngFor="let group of Sections | async">
+        MainSection: {{group.name}}<br>
+        Visiblity: {{group.disabled}}<br>
+        <div *ngFor="let subsec of group.section">
+            {{subsec.viewValue}}
+
+        </div>
+    </div>
+</div>

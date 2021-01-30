@@ -11,6 +11,9 @@ export interface projectControls {
   userdetailsprojectControl?:FormControl;
 
 }
+
+
+
 export interface userProfile {
   userAuthenObj: firebase.User,
   
@@ -43,6 +46,13 @@ export interface usrinfoDetails {
   areasOfinterest:string,
   skills: string,
   location:string
+}
+
+export interface projectDetails{
+  projectName: string;//Heading in testcase list
+  description:string;//Sub-Heading in testcase list
+  photoUrl: string;//Description in testcase view
+  projectsUid: string;//stackblitzLink in testcase edit/doubleclick
 }
 
 

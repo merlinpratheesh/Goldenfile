@@ -1,9 +1,9 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { FormControl, Validators } from '@angular/forms';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { startWith,map } from 'rxjs/operators';
-import { projectControls, UserdataService, usrinfoDetails } from '../service/userdata.service';
+import { projectControls, projectDetails, UserdataService, usrinfoDetails } from '../service/userdata.service';
 
 @Component({
   selector: 'app-profile',
@@ -11,6 +11,8 @@ import { projectControls, UserdataService, usrinfoDetails } from '../service/use
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit,OnDestroy  {
+  @Input() task: projectDetails;
+
 
   myusrinfoDetails: usrinfoDetails = {
     profileName: '',
@@ -21,7 +23,6 @@ export class ProfileComponent implements OnInit,OnDestroy  {
     location: ''
   };
   myprojectControls: projectControls = {
-
     userdetailsprojectControl: new FormControl(null, Validators.required)
   }
 

@@ -29,7 +29,7 @@
     "firebase": "^7.0 || ^8.0",
     "ngx-sharebuttons": "^8.0.5",
     "rxfire": "^4.0.0",
-    "rxjs": "~6.6.0",
+    "rxjs": "^6.6.3",
     "tslib": "^2.0.0",
     "zone.js": "~0.11.3"
   },
