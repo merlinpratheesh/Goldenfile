@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
-import { AngularFirestore, AngularFirestoreDocument ,AngularFirestoreCollection} from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { FormControl, Validators } from '@angular/forms';
 import firebase from 'firebase/app';
 import { Observable } from 'rxjs';
@@ -71,6 +71,33 @@ export class PublicComponent implements OnInit {
       })).subscribe(_ => {
       });
   }
+
+  uid = 'uid';
+  projectname = 'keys';
+  ref;
+  keyref;
+  
+  mydata;
+
+  projctsDetails(some) {
+    console.log(some);
+    this.ref = this.db.firestore.doc('profile/' + some.projectsUid);
+    this.keyref = this.db.firestore.doc('projectKeys/' + some.projectName);
+
+    this.mydata = docData(this.ref).pipe(
+      withLatestFrom(docData(this.keyref)),
+      map((values: any) => {
+        const [profileinfo, keyinfo] = values;
+        return {
+          profile: profileinfo.uidDetails,
+          key: keyinfo.mainSection
+        }
+
+      }));
+
+
+  }
+
   ngOnInit(): void {
   }
   ngOnDestroy() {
@@ -81,20 +108,6 @@ export class PublicComponent implements OnInit {
     moveItemInArray(this.localpublicList, event.previousIndex, event.currentIndex);
   }
 
-  projctsDetails(some) {
-    console.log(some);
-    this.aftersel = this.db.firestore.doc('/projectKeys' + some.projectName).pipe(
-      switchMap((someval: any) => {
-        console.log(someval);
-        return this.db.doc(('/profile' + some.usedid).pipe(
-          map((userdet: any) => {
-            return ({ userdetails: userdet, projectkey: someval });
-          })
-        ))
-
-      })
-    )
-  }
 
 
 }

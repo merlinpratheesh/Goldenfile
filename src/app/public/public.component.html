@@ -1,7 +1,11 @@
+
+
 <div class="header" color="#216fdb">
     <div>PublicProjects</div>
     <span fxFlex="primary"></span>
 </div>
+hello
+
 <mat-list class="listitem" role="list">
     <mat-list-item role="listitem">
         <cdk-virtual-scroll-viewport itemSize="100" class="scroll-viewport">
@@ -26,12 +30,17 @@
                             {{public.description}}
                         </div>
 
+                       
+
                         <mat-divider></mat-divider>
 
                     </mat-expansion-panel>
                 </div>
             </mat-accordion>
+            <div>
+                {{(mydata| async)?.key | json}}
 
+            </div>
         </cdk-virtual-scroll-viewport>
     </mat-list-item>
 </mat-list>
