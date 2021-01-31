@@ -3,7 +3,7 @@ import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firest
 import { FormControl, Validators } from '@angular/forms';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { startWith,map } from 'rxjs/operators';
-import { MainSectionGroup, projectControls, UserdataService, usrinfoDetails } from '../service/userdata.service';
+import { MainSectionGroup, projectControls, projectDetails, UserdataService, usrinfoDetails } from '../service/userdata.service';
 
 @Component({
   selector: 'app-key',
@@ -12,8 +12,15 @@ import { MainSectionGroup, projectControls, UserdataService, usrinfoDetails } fr
 })
 export class KeyComponent implements OnInit ,OnDestroy {
   @Input() key: Observable<any>;
+  @Input() keyref: projectDetails;
 
 
+  myprojectDetails: projectDetails = {
+    projectName: '',//Heading in testcase list
+    description:'',//Sub-Heading in testcase list
+    photoUrl: '',//Description in testcase view
+    projectsUid: ''//stackblitzLink in testcase edit/doubleclick
+  }
 
   myprojectControls: projectControls = {
     projectkeysControl: new FormControl(null, Validators.required),
@@ -44,24 +51,16 @@ export class KeyComponent implements OnInit ,OnDestroy {
     });
     return this.getSectionsBehaviourSub;
   };
-  projectkeys: any;
   constructor(public developmentservice: UserdataService, private db: AngularFirestore) {
-    this.projectkeys = this.myprojectControls.projectkeysControl.valueChanges.pipe(
-      startWith(''),
-      map((KeySelected: string) => {
-        if (!KeySelected || KeySelected === '') {
-          this.Sections = this.getSections(this.db.doc(('/projectKeys/keys')));
-          return KeySelected;
-        }
-      })).subscribe(_ => {
-      });
+ 
+          this.Sections = this.getSections(this.db.doc(('/projectKeys/'+this.keyref)));
+    
    }
 
   ngOnInit(): void {
   }
   ngOnDestroy() {
 
-    this.projectkeys.unsubscribe();
 
     this.getSectionsBehaviourSub?.unsubscribe();
   }

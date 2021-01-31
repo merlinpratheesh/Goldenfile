@@ -13,12 +13,27 @@ import { projectControls, projectDetails, UserdataService, usrinfoDetails } from
 export class ProfileComponent implements OnInit,OnDestroy  {
 
   @Input() profile: usrinfoDetails;
+  @Input() ref: projectDetails ;
 
+  myusrinfoDetails : usrinfoDetails = {
+    profileName:'',
+    email: '',
+    gender:'',
+    areaOfinterest:'',
+    skills: '',
+    location:''
+  }
+
+  myprojectDetails: projectDetails = {
+    projectName: '',//Heading in testcase list
+    description:'',//Sub-Heading in testcase list
+    photoUrl: '',//Description in testcase view
+    projectsUid: ''//stackblitzLink in testcase edit/doubleclick
+  }
 
   myprojectControls: projectControls = {
     userdetailsprojectControl: new FormControl(null, Validators.required)
   }
-
   userinfoDetails : any;
   localuserinfoDetails = [];
   getuserinfoDetailsSubscription: Subscription;
@@ -43,25 +58,17 @@ export class ProfileComponent implements OnInit,OnDestroy  {
     });
     return this.getuserinfoDetailsBehaviourSub;
   };
-  userinfo: Subscription;
   constructor(public developmentservice: UserdataService, private db: AngularFirestore) { 
 
-    this.userinfo =this.myprojectControls.userdetailsprojectControl.valueChanges.pipe(
-      startWith(''),
-      map((ProfileviewSelected: string) => {
-        if (!ProfileviewSelected || ProfileviewSelected === '') {
-          this.userinfoDetails = this.getuserinfoDetails(this.db.doc(('/profile/uid')));
+    
+          this.userinfoDetails = this.getuserinfoDetails(this.db.doc(('/profile/'+this.ref)));
 
-          return ProfileviewSelected;
-        }
-      })).subscribe(_ => {
-      });
+     
   }
 
   ngOnInit(): void {
   }
   ngOnDestroy() {
-    this.userinfo.unsubscribe();
  
     this.getuserinfoDetailsSubscription?.unsubscribe()
 

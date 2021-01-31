@@ -21,7 +21,6 @@ export class PublicComponent implements OnInit {
   @Output() projctsDetails = new EventEmitter;
 
 
-
   myuserProfile: userProfile = {
     userAuthenObj: null,//Receive User obj after login success
     myusrinfoFromDb: null
@@ -57,8 +56,6 @@ export class PublicComponent implements OnInit {
     return this.getPublicListBehaviourSub;
   };
 
-
-  
   constructor(public developmentservice: UserdataService, private db: AngularFirestore) {
 
     this.publicList = this.getPublicList(this.db.doc(('/projectList/publicProjects')));
