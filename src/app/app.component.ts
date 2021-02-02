@@ -47,8 +47,6 @@ export class AppComponent implements OnDestroy {
     this.afAuth.signOut();
   }
 
-  uid = 'uid';
-  projectname = 'keys';
   ref;
   keyref;
   someinfodetails:something={
@@ -60,13 +58,15 @@ export class AppComponent implements OnDestroy {
   mysub:Subscription;
   projctDetails(some) {
   this.ref = this.db.firestore.doc('profile/' + some.ref);
-  this.keyref = this.db.firestore.doc('projectKeys/' + some.keyref);
+  this.keyref = this.db.firestore.doc('projectKey/' + some.keyref);
 
    this.mysub=docData(this.ref).pipe(
     withLatestFrom(docData(this.keyref)),
     map((values: any) => {
       const [profileinfo, keyinfo] = values;
-      this.profileinfoupdated=profileinfo.uidDetails;
+      this.profileinfoupdated=profileinfo.profileMoreinfo;
+      console.log(this.profileinfoupdated);
+
       this.keyinfoupadted=keyinfo.mainSection;
     })).subscribe(success=>{
 

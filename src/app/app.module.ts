@@ -19,7 +19,7 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
   signInOptions: [
       {       
         provider: firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-        clientId: '808980311188-tsdv14grk5g7q0r8148up0ii8h2gf2f3.apps.googleusercontent.com'
+        clientId: '169411732288-m03vg8r1ebrj93fu8e2a85vfg9jt1q4s.apps.googleusercontent.com'
       }],  
     credentialHelper: firebaseui.auth.CredentialHelper.GOOGLE_YOLO
   

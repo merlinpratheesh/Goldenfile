@@ -40,18 +40,14 @@ export class PublicComponent implements OnInit {
         } else {
           this.localpublicList = val.public;
           this.getPublicListBehaviourSub.next(val.public);
-
         }
       }
     });
     return this.getPublicListBehaviourSub;
   };
-
-
-  
   constructor(public developmentservice: UserdataService, private db: AngularFirestore) {
 
-    this.publicList = this.getPublicList(this.db.doc(('/projectList/publicProjects')));
+    this.publicList = this.getPublicList(this.db.doc(('/projectList/publicProject')));
 
   }
 
