@@ -1,4 +1,26 @@
-<div >
+<div *ngIf="(!key)">
+    <mat-card class="example-card" fxFlex="80vw" fxFlex.lt-sm="40vw">
+        <div style="color:yellow; padding:5px;" fxLayout="column" fxLayoutGap="5%"
+            fxLayoutAlign="space-between center">
+            <div>
+                <h1> Analayze all the Steps of a Task </h1>
+                <h1> Record all the Steps for Easy Tracking </h1>
+
+                <div fxLayout="column" fxLayoutGap="10%">
+                    <mat-chip-list>
+                        <mat-chip
+                            style="font-size:5em; cursor:none; opacity:.6; background-color:yellow;color: red; padding:10px;height: 60px !important;">
+                            Start Tasking!!</mat-chip>
+                    </mat-chip-list>
+                </div>
+            </div>
+        </div>
+
+    </mat-card>
+</div>
+
+
+<div *ngIf="(key)">
     <div class="bio-1" *ngFor="let group of key ">
         MainSection: {{group.name}}<br>
         Visiblity: {{group.disabled}}<br>

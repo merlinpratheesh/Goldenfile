@@ -3,7 +3,7 @@ import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firest
 import { FormControl, Validators } from '@angular/forms';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { startWith,map } from 'rxjs/operators';
-import { projectControls, projectDetails, UserdataService, usrinfoDetails } from '../service/userdata.service';
+import { projectDetails, UserdataService, usrinfoDetails } from '../service/userdata.service';
 
 @Component({
   selector: 'app-profile',
@@ -13,57 +13,35 @@ import { projectControls, projectDetails, UserdataService, usrinfoDetails } from
 export class ProfileComponent implements OnInit,OnDestroy  {
 
   @Input() profile: usrinfoDetails;
+  
 
 
-  myprojectControls: projectControls = {
-    userdetailsprojectControl: new FormControl(null, Validators.required)
+  myusrinfoDetails: usrinfoDetails = {
+    profileName: '',
+    email: '',
+    gender:'',
+    areaOfinterest:'',
+    skills: '',
+    location:''
+  }
+  myProjectdetails: projectDetails={
+    projectName: '',//Heading in testcase list
+    description:'',//Sub-Heading in testcase list
+    photoUrl: '',//Description in testcase view
+    projectUid: '',//stackblitzLink in testcase edit/doubleclick
+    creationDate:'',
+    profileName:''
   }
 
-  userinfoDetails : any;
-  localuserinfoDetails = [];
-  getuserinfoDetailsSubscription: Subscription;
-  getuserinfoDetailsBehaviourSub = new BehaviorSubject(undefined);
-  getuserinfoDetails = (uid: AngularFirestoreDocument<any>) => {
-    if (this.getuserinfoDetailsSubscription !== undefined) {
-      this.getuserinfoDetailsSubscription.unsubscribe();
-    }
-    this.getuserinfoDetailsSubscription = uid.valueChanges().subscribe((val: any) => {
-      console.log('val', val);
-      if (val === undefined) {
-        this.getuserinfoDetailsBehaviourSub.next(undefined);
-      } else {
-        if (val.uidDetails.length === 0) {
-          this.getuserinfoDetailsBehaviourSub.next(null);
-        } else {
-          this.localuserinfoDetails = val.uidDetails;
-          this.getuserinfoDetailsBehaviourSub.next(val.uidDetails);
 
-        }
-      }
-    });
-    return this.getuserinfoDetailsBehaviourSub;
-  };
-  userinfo: Subscription;
   constructor(public developmentservice: UserdataService, private db: AngularFirestore) { 
 
-    this.userinfo =this.myprojectControls.userdetailsprojectControl.valueChanges.pipe(
-      startWith(''),
-      map((ProfileviewSelected: string) => {
-        if (!ProfileviewSelected || ProfileviewSelected === '') {
-          this.userinfoDetails = this.getuserinfoDetails(this.db.doc(('/profile/uid')));
 
-          return ProfileviewSelected;
-        }
-      })).subscribe(_ => {
-      });
   }
-
   ngOnInit(): void {
   }
   ngOnDestroy() {
-    this.userinfo.unsubscribe();
  
-    this.getuserinfoDetailsSubscription?.unsubscribe()
 
   }
 

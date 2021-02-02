@@ -8,7 +8,7 @@ import { map, switchMap, startWith, withLatestFrom } from 'rxjs/operators';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { ChangeDetectionStrategy } from '@angular/core';
 import { MatAccordion } from '@angular/material/expansion';
-import { projectControls, projectDetails, UserdataService, userProfile } from '../service/userdata.service';
+import { projectDetails, UserdataService, userProfile } from '../service/userdata.service';
 import { docData } from 'rxfire/firestore';
 
 
@@ -21,15 +21,6 @@ export class PublicComponent implements OnInit {
   @Output() projctsDetails = new EventEmitter;
 
 
-
-  myuserProfile: userProfile = {
-    userAuthenObj: null,//Receive User obj after login success
-    myusrinfoFromDb: null
-
-  };
-  myprojectControls: projectControls = {
-    publicprojectControl: new FormControl(null, Validators.required),
-  }
 
 
   publicList: any;
@@ -48,7 +39,6 @@ export class PublicComponent implements OnInit {
           this.getPublicListBehaviourSub.next(null);
         } else {
           this.localpublicList = val.public;
-          console.log(val.public);
           this.getPublicListBehaviourSub.next(val.public);
 
         }
@@ -68,7 +58,7 @@ export class PublicComponent implements OnInit {
 
   projectsDetails(some) {
     console.log('86', some);
-    this.projctsDetails.emit({ ref: some.projectsUid, keyref: some.projectName })
+    this.projctsDetails.emit({ ref: some.projectUid, keyref: some.projectName })
   }
 
   ngOnInit(): void {

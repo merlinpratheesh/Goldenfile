@@ -1,14 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { FormControl, Validators } from '@angular/forms';
 import { docData } from 'rxfire/firestore';
-import {of ,Observable} from 'rxjs';
+import {of ,Observable, Subscription} from 'rxjs';
 import { map, withLatestFrom } from 'rxjs/operators';
-import { projectControls, projectDetails, UserdataService, userProfile } from './service/userdata.service';
+import { projectDetails, UserdataService, userProfile } from './service/userdata.service';
 
 export interface something{
-  profileinfo: string;
-  key:string;
+  profileinfo: any;
+  key:any;
 }
 
 @Component({
@@ -17,7 +17,7 @@ export interface something{
   styleUrls: ['./app.component.scss']
 })
 
-export class AppComponent {
+export class AppComponent implements OnDestroy {
   title = 'Goldenfile';
   profile:any;
   key:any;
@@ -27,27 +27,30 @@ export class AppComponent {
   projectname = 'keys';
   ref;
   keyref;
+  someinfodetails:something={
+    profileinfo:undefined,
+    key: undefined
+  };
   
-  mydata:Observable<something>=of({profileinfo:null, key:null });
 
+  profileinfoupdated: any;
+  keyinfoupadted: any;
+  mysub:Subscription;
   projctDetails(some) {
-  console.log('28',some);
-  
   this.ref = this.db.firestore.doc('profile/' + some.ref);
   this.keyref = this.db.firestore.doc('projectKeys/' + some.keyref);
 
-  this.mydata = docData(this.ref).pipe(
+   this.mysub=docData(this.ref).pipe(
     withLatestFrom(docData(this.keyref)),
     map((values: any) => {
       const [profileinfo, keyinfo] = values;
-    
+      this.profileinfoupdated=profileinfo.uidDetails;
+      this.keyinfoupadted=keyinfo.mainSection;
+    })).subscribe(success=>{
 
-
-      return {
-        profileinfo: profileinfo.uidDetails,
-        key: keyinfo.mainSection
-      }
-
-    }));
+    });
+}
+ngOnDestroy(){
+  this.mysub.unsubscribe();
 }
 }

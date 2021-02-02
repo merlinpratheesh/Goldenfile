@@ -5,19 +5,8 @@ import { map } from 'rxjs/operators';
 import firebase from 'firebase/app';
 import { AngularFirestore } from '@angular/fire/firestore';
 
-export interface projectControls {
-  publicprojectControl?: FormControl;//1-User selects a public project    
-  projectkeysControl?:FormControl;
-  userdetailsprojectControl?:FormControl;
-
-}
 
 
-
-export interface userProfile {
-  userAuthenObj: firebase.User,
-  
-}
 
 export interface SubSection {
   viewvalue: string;
@@ -52,7 +41,9 @@ export interface projectDetails{
   projectName: string;//Heading in testcase list
   description:string;//Sub-Heading in testcase list
   photoUrl: string;//Description in testcase view
-  projectsUid: string;//stackblitzLink in testcase edit/doubleclick
+  projectUid: string;//stackblitzLink in testcase edit/doubleclick
+  creationDate:string;
+  profileName:string;
 }
 
 

@@ -1,54 +1,35 @@
-
-
 <div class="header" color="#216fdb">
     <div>PublicProjects</div>
     <span fxFlex="primary"></span>
 </div>
 
 
-<div *ngIf ="(publicList | async) as projectDetails">
-    <div *ngFor="let details of projectDetails">
-        {{details.projectName | json}}<br>
-        {{details.projectsUid | json}}<br>
-        {{details.description | json}}<br>
-
-    </div>
-</div>
 <mat-list class="listitem" role="list">
     <mat-list-item role="listitem">
         <cdk-virtual-scroll-viewport itemSize="100" class="scroll-viewport">
-            <mat-accordion  class="example-headers-align" *ngIf ="(publicList | async) as projectDetails">
+            <mat-accordion class="example-headers-align" *ngIf="(publicList | async) as projectDetails">
                 <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
-                    <mat-expansion-panel               
-                        *ngFor="let details of projectDetails"  cdkDrag>
-
+                    <mat-expansion-panel *ngFor="let details of projectDetails"  cdkDrag>
                         <mat-expansion-panel-header class="mybutton" (click)="projectsDetails(details)">
                             <mat-panel-title>
                                 {{details.projectName}}
+
                             </mat-panel-title>
+                            <mat-panel-description>
+                                {{details.profileName}}
+                                {{details.photoUrl}}
+                                {{details.creationDate}}
 
-                            <mat-panel-description fxFlex="10vw">
-
-                                {{details.projectsUid}}
                                 <mat-icon>account_circle</mat-icon>
-
                             </mat-panel-description>
                         </mat-expansion-panel-header>
-                        <mat-expansion-panel (opened)="panelOpenState = true"
-                        (closed)="panelOpenState = false">
-                        <div>
-                            {{details.description}}
-                        </div>
-                    </mat-expansion-panel>
 
-                       
-
-                        <mat-divider></mat-divider>
+                        {{details.description}}
 
                     </mat-expansion-panel>
+                    <mat-divider></mat-divider>
                 </div>
             </mat-accordion>
-            
         </cdk-virtual-scroll-viewport>
     </mat-list-item>
 </mat-list>
