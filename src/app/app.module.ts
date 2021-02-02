@@ -13,7 +13,17 @@ import { environment } from '../environments/environment';
 import { ProfileComponent } from './profile/profile.component';
 import { KeyComponent } from './key/key.component';
 import { PublicComponent } from './public/public.component'
-
+import {firebase,  FirebaseUIModule} from 'firebaseui-angular';
+import {firebaseui} from 'firebaseui-angular';
+const firebaseUiAuthConfig: firebaseui.auth.Config = {
+  signInOptions: [
+      {       
+        provider: firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+        clientId: '808980311188-tsdv14grk5g7q0r8148up0ii8h2gf2f3.apps.googleusercontent.com'
+      }],  
+    credentialHelper: firebaseui.auth.CredentialHelper.GOOGLE_YOLO
+  
+  };
 
 @NgModule({
   declarations: [
@@ -27,10 +37,12 @@ import { PublicComponent } from './public/public.component'
     AppRoutingModule,
     BrowserAnimationsModule,
     AppSharedModule,
-    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireModule.initializeApp(environment.firebaseconfig),
     AngularFirestoreModule, // firestore
     AngularFireAuthModule, // auth
-    AngularFireStorageModule // storage
+    AngularFireStorageModule, // storage
+    FirebaseUIModule.forRoot(firebaseUiAuthConfig)
+
   ],
   providers: [],
   bootstrap: [AppComponent]
