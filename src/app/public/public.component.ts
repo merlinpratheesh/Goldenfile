@@ -53,9 +53,12 @@ export class PublicComponent implements OnInit {
 
 
   projectsDetails(some) {
-    console.log('86', some);
+    console.log('56', some);
+
+    console.log('58', some.projectName);
     this.projctsDetails.emit({ ref: some.projectUid, keyref: some.projectName })
   }
+
 
   ngOnInit(): void {
   }

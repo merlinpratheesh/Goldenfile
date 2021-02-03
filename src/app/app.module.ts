@@ -5,6 +5,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppSharedModule } from './app-shared/app-shared.module';
+import { NestedTreeComponent,BottomSheetChangeOrder } from './nested-tree/nested-tree.component';
+import { AddNodeComponent,NewNodeDialog } from './nested-tree/add-node/add-node.component';
+import { DeleteNodeComponent, } from './nested-tree/delete-node/delete-node.component';
+import { EditNodeComponent,EditNodeDialog } from './nested-tree/edit-node/edit-node.component';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
@@ -14,6 +18,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { KeyComponent } from './key/key.component';
 import { PublicComponent } from './public/public.component'
 import {firebase,  FirebaseUIModule} from 'firebaseui-angular';
+
 import {firebaseui} from 'firebaseui-angular';
 const firebaseUiAuthConfig: firebaseui.auth.Config = {
   signInOptions: [
@@ -30,7 +35,14 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
     AppComponent,
     ProfileComponent,
     KeyComponent,
-    PublicComponent
+    PublicComponent,
+    NestedTreeComponent,
+    BottomSheetChangeOrder,
+    AddNodeComponent,
+    NewNodeDialog,
+    DeleteNodeComponent,
+    EditNodeComponent,
+    EditNodeDialog
   ],
   imports: [
     BrowserModule,

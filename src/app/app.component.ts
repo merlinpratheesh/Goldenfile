@@ -1,10 +1,10 @@
 import { Component, OnDestroy } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { FormControl, Validators } from '@angular/forms';
 import { docData } from 'rxfire/firestore';
-import {of ,Observable, Subscription} from 'rxjs';
+import {of ,Observable, Subscription, BehaviorSubject} from 'rxjs';
 import { map, withLatestFrom } from 'rxjs/operators';
-import { projectDetails, UserdataService, userProfile } from './service/userdata.service';
+import { MainSectionGroup, projectDetails, UserdataService, userProfile } from './service/userdata.service';
 import {FirebaseUISignInFailure, FirebaseUISignInSuccessWithAuthResult, FirebaseuiAngularLibraryService} from 'firebaseui-angular';
 import {AngularFireAuth} from '@angular/fire/auth';
 
@@ -23,6 +23,29 @@ export class AppComponent implements OnDestroy {
   title = 'Goldenfile';
   profile:any;
   key:any;
+  Sections = of(undefined);
+  getSectionsSubscription: Subscription;
+  getSectionsBehaviourSub = new BehaviorSubject(undefined);
+  getSections = (MainAndSubSectionkeys: AngularFirestoreDocument<MainSectionGroup>) => {
+    if (this.getSectionsSubscription !== undefined) {
+      this.getSectionsSubscription.unsubscribe();
+    }
+    this.getSectionsSubscription = MainAndSubSectionkeys.valueChanges().subscribe((val: any) => {
+      if (val === undefined) {
+        this.getSectionsBehaviourSub.next(undefined);
+      } else {
+        if (val.MainSection.length === 0) {
+          this.getSectionsBehaviourSub.next(null);
+        } else {
+          if (val.MainSection.length !== 0) {
+            this.getSectionsBehaviourSub.next(val.MainSection);
+          }
+        }
+      }
+    });
+    return this.getSectionsBehaviourSub;
+  };
+
   constructor(public developmentservice: UserdataService, private db: AngularFirestore, private afAuth: AngularFireAuth, private firebaseuiAngularLibraryService: FirebaseuiAngularLibraryService) 
   {
     firebaseuiAngularLibraryService.firebaseUiInstance.disableAutoSignIn();
@@ -48,24 +71,29 @@ export class AppComponent implements OnDestroy {
   }
 
   ref;
-  keyref;
+  keyref = this.getSections((this.db.doc('projectKey/' + 'React')));
   someinfodetails:something={
     profileinfo:undefined,
     key: undefined
   };
   profileinfoupdated: any;
-  keyinfoupadted: any;
+  keyinfoupadted: Observable<any>=of(undefined);
   mysub:Subscription;
+  userselectedProject='SHOW';
   projctDetails(some) {
+    this.userselectedProject=some.keyref;
+    console.log(some.keyref);
   this.ref = this.db.firestore.doc('profile/' + some.ref);
-  this.keyref = this.db.firestore.doc('projectKey/' + some.keyref);
-
+  
+  this.getSectionsSubscription?.unsubscribe();
+  this.keyref = this.getSections((this.db.doc('projectKey/' + some.keyref)));
    this.mysub=docData(this.ref).pipe(
-    withLatestFrom(docData(this.keyref)),
+    withLatestFrom(this.keyref),
     map((values: any) => {
       const [profileinfo, keyinfo] = values;
       this.profileinfoupdated=profileinfo.profileMoreinfo;
-      this.keyinfoupadted=keyinfo.mainSection;
+      console.log(keyinfo);
+      this.keyinfoupadted=keyinfo;
     })).subscribe(success=>{
 
     });
