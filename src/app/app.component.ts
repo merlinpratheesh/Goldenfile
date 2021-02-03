@@ -65,8 +65,6 @@ export class AppComponent implements OnDestroy {
     map((values: any) => {
       const [profileinfo, keyinfo] = values;
       this.profileinfoupdated=profileinfo.profileMoreinfo;
-      console.log(this.profileinfoupdated);
-
       this.keyinfoupadted=keyinfo.mainSection;
     })).subscribe(success=>{
 

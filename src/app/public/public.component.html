@@ -13,17 +13,16 @@
                         <mat-expansion-panel-header class="mybutton" >
                             <mat-panel-title>
                                 {{details.projectName}}
+                                {{details.profileName}}
 
                             </mat-panel-title>
                             <mat-panel-description>
-                                {{details.profileName}}
-                                {{details.photoUrl}}
-                                {{details.creationDate}}
-                                {{details.projectUid}}
+                                <div mat-card-avatar [ngStyle]="{'background-image': 'url(' + details.photoUrl + ')', 'background-size': 'cover'  }" ></div>
+                                {{details.creationDate.toDate() | date:'dd-mm-yyyy'}}
 
-                                <mat-icon>account_circle</mat-icon>
                             </mat-panel-description>
                         </mat-expansion-panel-header>
+                        <mat-icon>account_circle</mat-icon>
 
                         {{details.description}}
 
