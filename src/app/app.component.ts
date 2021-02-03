@@ -70,8 +70,8 @@ export class AppComponent implements OnDestroy {
     this.afAuth.signOut();
   }
 
-  ref;
-  keyref = this.getSections((this.db.doc('projectKey/' + 'React')));
+  profileRef;
+  keyRef = this.getSections((this.db.doc('projectKey/' + 'React')));
   someinfodetails:something={
     profileinfo:undefined,
     key: undefined
@@ -83,17 +83,17 @@ export class AppComponent implements OnDestroy {
   projctDetails(some) {
     this.userselectedProject=some.keyref;
     console.log(some.keyref);
-  this.ref = this.db.firestore.doc('profile/' + some.ref);
+  this.profileRef = this.db.firestore.doc('profile/' + some.ref);
   
   this.getSectionsSubscription?.unsubscribe();
-  this.keyref = this.getSections((this.db.doc('projectKey/' + some.keyref)));
-   this.mysub=docData(this.ref).pipe(
-    withLatestFrom(this.keyref),
+  this.keyRef = this.getSections((this.db.doc('projectKey/' + some.keyref)));
+   this.mysub=docData(this.profileRef).pipe(
+    withLatestFrom(this.keyRef),
     map((values: any) => {
-      const [profileinfo, keyinfo] = values;
+      const [profileinfo] = values;
       this.profileinfoupdated=profileinfo.profileMoreinfo;
-      console.log(keyinfo);
-      this.keyinfoupadted=keyinfo;
+      console.log(this.keyRef);
+      console.log(this.profileinfoupdated);
     })).subscribe(success=>{
 
     });
