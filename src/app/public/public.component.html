@@ -9,16 +9,16 @@
         <cdk-virtual-scroll-viewport itemSize="100" class="scroll-viewport">
             <mat-accordion class="example-headers-align" *ngIf="(publicList | async) as projectDetails">
                 <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
-                    <mat-expansion-panel *ngFor="let details of projectDetails" (click)="projectsDetails(details)" cdkDrag>
+                    <mat-expansion-panel class="example-box" *ngFor="let details of projectDetails" (click)="projectsDetails(details)" cdkDrag>
                         <mat-expansion-panel-header class="mybutton" >
                             <mat-panel-title>
                                 {{details.projectName}}
                                 {{details.profileName}}
+                                {{details.creationDate.toDate() | date:'dd-mm-yyyy'}}
 
                             </mat-panel-title>
                             <mat-panel-description>
                                 <div mat-card-avatar [ngStyle]="{'background-image': 'url(' + details.photoUrl + ')', 'background-size': 'cover'  }" ></div>
-                                {{details.creationDate.toDate() | date:'dd-mm-yyyy'}}
 
                             </mat-panel-description>
                         </mat-expansion-panel-header>
