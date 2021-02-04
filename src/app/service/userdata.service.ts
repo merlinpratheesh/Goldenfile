@@ -34,7 +34,11 @@ export interface usrinfoDetails {
   gender:string,
   areaOfinterest:string,
   skills: string,
-  location:string
+  location:string,
+  membershipEnd: string,
+  membershipType: string,
+  projectLocation: string,
+  photoUrl: string
 }
 
 export interface projectDetails{

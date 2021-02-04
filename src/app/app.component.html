@@ -1,29 +1,47 @@
+<mat-toolbar color="white">
+  <h1 class="SignInbutton">
+      StepsWise Tracking Tool
+  </h1>
+  <span fxFlex="grow"></span>
+
+<div class="create" >
+  Create New Project
+</div>
+<div fxHide.lt-sm>
+  Welcome 
+</div>
+
+<div >
+  <firebase-ui fxLayout="column" (signInSuccessWithAuthResult)="successCallback($event)"
+  (signInFailure)="errorCallback($event)"
+  (uiShown)="uiShownCallback()"></firebase-ui>
+</div>
+
+  <button class="SignInbutton">
+      <fa-icon (click)="logout()" class="fas faSignOutAlt fa-lg" [icon]="['fas', 'sign-out-alt']">
+      </fa-icon>
+  </button>
+</mat-toolbar>
 
 
-
-             <button (click)="logout()">Logout</button>
 
 
 <mat-grid-list  cols="10" rowHeight="50vh" >
 
-  <mat-grid-tile  colspan="2" rowspan="1" [style.background]="'#F2F3F5'">
-    <app-profile [profile]="profileinfoupdated"></app-profile>
+  <mat-grid-tile  colspan="2" rowspan="2" [style.background]="'#F2F3F5'">
+    <app-profile [profile]="profileRef" ></app-profile>
 
   </mat-grid-tile>
 
   <mat-grid-tile colspan="4" rowspan="2" [style.background]="'#F2F3F5'">
-    <app-public (projctsDetails)="projctDetails($event)"></app-public>
+    <app-public (projctsDetails)="projctDetails($event)" ></app-public>
   </mat-grid-tile>
 
   <mat-grid-tile colspan="4" rowspan="2" [style.background]="'#F2F3F5'">
 <app-nested-tree  [Sections]="keyRef" [latestProject]="userselectedProject"  fxFlex fxFlexAlign="center"></app-nested-tree>
 
   </mat-grid-tile>
-  <mat-grid-tile  colspan="2" rowspan="1" [style.background]="'#F2F3F5'">
-    <firebase-ui fxLayout="column" (signInSuccessWithAuthResult)="successCallback($event)"
-    (signInFailure)="errorCallback($event)"
-    (uiShown)="uiShownCallback()"></firebase-ui>
-  </mat-grid-tile>
+
 
 </mat-grid-list>
 

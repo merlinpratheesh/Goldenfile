@@ -4,7 +4,7 @@ import { FormControl, Validators } from '@angular/forms';
 import { docData } from 'rxfire/firestore';
 import {of ,Observable, Subscription, BehaviorSubject} from 'rxjs';
 import { map, withLatestFrom } from 'rxjs/operators';
-import { MainSectionGroup, projectDetails, UserdataService, userProfile } from './service/userdata.service';
+import { MainSectionGroup, projectDetails, UserdataService, userProfile, usrinfoDetails } from './service/userdata.service';
 import {FirebaseUISignInFailure, FirebaseUISignInSuccessWithAuthResult, FirebaseuiAngularLibraryService} from 'firebaseui-angular';
 import {AngularFireAuth} from '@angular/fire/auth';
 
@@ -46,6 +46,29 @@ export class AppComponent implements OnDestroy {
     return this.getSectionsBehaviourSub;
   };
 
+  Profiles = of(undefined);
+  getProfilesSubscription: Subscription;
+  getProfilesBehaviourSub = new BehaviorSubject(undefined);
+  getProfiles = (profileDetails: AngularFirestoreDocument<usrinfoDetails>) => {
+    if (this.getProfilesSubscription !== undefined) {
+      this.getProfilesSubscription.unsubscribe();
+    }
+    this.getProfilesSubscription = profileDetails.valueChanges().subscribe((val: any) => {
+      if (val === undefined) {
+        this.getProfilesBehaviourSub.next(undefined);
+      } else {
+        if (val.profileMoreinfo.length === 0) {
+          this.getProfilesBehaviourSub.next(null);
+        } else {
+          if (val.profileMoreinfo.length !== 0) {
+            this.getProfilesBehaviourSub.next(val.profileMoreinfo);
+          }
+        }
+      }
+    });
+    return this.getProfilesBehaviourSub;
+  };
+
   constructor(public developmentservice: UserdataService, private db: AngularFirestore, private afAuth: AngularFireAuth, private firebaseuiAngularLibraryService: FirebaseuiAngularLibraryService) 
   {
     firebaseuiAngularLibraryService.firebaseUiInstance.disableAutoSignIn();
@@ -83,20 +106,10 @@ export class AppComponent implements OnDestroy {
   projctDetails(some) {
     this.userselectedProject=some.keyref;
     console.log(some.keyref);
-  this.profileRef = this.db.firestore.doc('profile/' + some.ref);
+  this.profileRef = this.getProfiles((this.db.doc('profile/' + some.profileRef)));
   
   this.getSectionsSubscription?.unsubscribe();
   this.keyRef = this.getSections((this.db.doc('projectKey/' + some.keyref)));
-   this.mysub=docData(this.profileRef).pipe(
-    withLatestFrom(this.keyRef),
-    map((values: any) => {
-      const [profileinfo] = values;
-      this.profileinfoupdated=profileinfo.profileMoreinfo;
-      console.log(this.keyRef);
-      console.log(this.profileinfoupdated);
-    })).subscribe(success=>{
-
-    });
 }
 ngOnDestroy(){
   this.mysub.unsubscribe();

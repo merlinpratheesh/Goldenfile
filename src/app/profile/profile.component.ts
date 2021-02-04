@@ -22,7 +22,12 @@ export class ProfileComponent implements OnInit,OnDestroy  {
     gender:'',
     areaOfinterest:'',
     skills: '',
-    location:''
+    location:'',
+    membershipEnd: '',
+    membershipType: '',
+    projectLocation: '',
+    photoUrl: ''
+
   }
   myProjectdetails: projectDetails={
     projectName: '',//Heading in testcase list
@@ -30,7 +35,8 @@ export class ProfileComponent implements OnInit,OnDestroy  {
     photoUrl: '',//Description in testcase view
     projectUid: '',//stackblitzLink in testcase edit/doubleclick
     creationDate:'',
-    profileName:''
+    profileName:'',
+
   }
 
 

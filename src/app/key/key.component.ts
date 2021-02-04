@@ -14,14 +14,7 @@ export class KeyComponent implements OnInit ,OnDestroy {
   @Input() key: Observable<any>;
 
 
-  myProjectdetails: projectDetails={
-    projectName: '',//Heading in testcase list
-    description:'',//Sub-Heading in testcase list
-    photoUrl: '',//Description in testcase view
-    projectUid: '',//stackblitzLink in testcase edit/doubleclick
-    creationDate:'',
-    profileName:''
-  }
+ 
 
   constructor(public developmentservice: UserdataService, private db: AngularFirestore) {
 

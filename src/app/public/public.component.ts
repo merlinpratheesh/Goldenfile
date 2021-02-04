@@ -56,7 +56,7 @@ export class PublicComponent implements OnInit {
     console.log('56', some);
 
     console.log('58', some.projectName);
-    this.projctsDetails.emit({ ref: some.projectUid, keyref: some.projectName })
+    this.projctsDetails.emit({ profileRef: some.projectUid, keyref: some.projectName })
   }
 
 
