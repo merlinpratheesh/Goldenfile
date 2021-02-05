@@ -37,3 +37,19 @@ font-family: inherit;
     vertical-align: middle !important;
     background: #fff url(https://vuejs.org/images/search.png )  8px 5px no-repeat;
 }
+.scroll-viewport {
+    margin:5px;
+    top:0px;
+    height:700px;
+    width: 700px;
+    position: relative;
+
+  }
+  .viewHeading {
+    margin:10px;
+    top:55px;
+    height:700px;
+    width: 700px;
+    position: relative;
+
+  }

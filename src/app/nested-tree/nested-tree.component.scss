@@ -1,5 +1,6 @@
 mat-tree {
   margin-left: 20px;
+  top:0px
 }
 .mat-tree-node {
   padding: 0;
@@ -32,7 +33,7 @@ li {
   border: 20px solid black;
   border-width: 0 0 2px 2px; 
   position: relative;
-  top: -20px;
+  top: -25px;
   padding-bottom: 1.5%;
   
 }
@@ -47,12 +48,51 @@ div {
 }
 
 ul {
-  border-top: 2px solid black;
+  border-top: 2px solid rgb(1, 15, 15);
   margin-left: -40px;
   padding-left: 60px;
-  padding-bottom: -2%;
+  padding-bottom: 0%;
 }
 
 .mat-icon-button {
-  z-index: 100;
+  z-index: 0;
 }
+
+  $color : rgb(190,230,180);
+  $color-dark : darken($color, 55%);
+  $color-light : lighten($color, 5%);
+
+mat-tree{
+    background: linear-gradient(to bottom left, $color-dark, $color);
+    font-family: 'Open Sans', Helvetica, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  mat-card {
+    background: linear-gradient(to bottom left, $color-dark, $color);
+    font-family: 'Open Sans', Helvetica, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+.SignInbutton{
+  font-family: inherit;
+      display: inline-block;
+      position:relative;
+
+      border: 0 !important;
+      outline: 0;
+      padding: 10px 20px 12px !important;
+      line-height: 1.4;
+      background: #444857;
+      color: white !important;
+      border-radius: 4px !important;
+      font-size: 1rem;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      text-decoration: none !important;
+      font-weight: normal;
+      -webkit-transition: all 0.2s ease;
+      transition: all 0.2s ease;
+      cursor: pointer;
+  }

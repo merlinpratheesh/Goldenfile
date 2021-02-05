@@ -1,8 +1,11 @@
+
+
 <div *ngIf="!profile">
+    <cdk-virtual-scroll-viewport itemSize="100" class="scroll-viewport">
 
     <mat-card class="example-card" fxFlex="20vw" fxFlex.lt-sm="40vw">
 
-        <div fxLayout="row" fxLayoutGap="20%" fxLayoutAlign="space-between center">
+        <div fxLayout="row" fxLayoutGap="15%" fxLayoutAlign="space-between center">
             <div>
                 <h1> Analayze all the Steps of a Task </h1>
                 <h1> Record all the Steps for Easy Tracking </h1>
@@ -18,7 +21,7 @@
         </div>
 
     </mat-card>
-
+    </cdk-virtual-scroll-viewport>
 </div>
 
 
