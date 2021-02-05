@@ -4,32 +4,33 @@
 </div>
 
 
-<mat-list class="listitem" role="list">
-    <mat-list-item role="listitem">
-        <cdk-virtual-scroll-viewport itemSize="100" class="scroll-viewport">
-            <mat-accordion class="example-headers-align" *ngIf="(publicList | async) as projectDetails">
-                <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
-                    <mat-expansion-panel class="example-box" *ngFor="let details of projectDetails" (click)="projectsDetails(details)" cdkDrag>
-                        <mat-expansion-panel-header class="mybutton" >
-                            <mat-panel-title>
-                                {{details.projectName}}
-                                {{details.profileName}}
-                                {{details.creationDate.toDate() | date:'dd-mm-yyyy'}}
 
-                            </mat-panel-title>
-                            <mat-panel-description>
-                                <div mat-card-avatar [ngStyle]="{'background-image': 'url(' + details.photoUrl + ')', 'background-size': 'cover'  }" ></div>
+<cdk-virtual-scroll-viewport itemSize="100" class="scroll-viewport">
+    <mat-accordion class="example-headers-align"*ngIf="(publicList | async) as projectDetails">
 
-                            </mat-panel-description>
-                        </mat-expansion-panel-header>
-                        <mat-icon>account_circle</mat-icon>
+            <mat-expansion-panel fxLayout="row" style=" padding: 20px 10px;min-width:50%;" *ngFor="let details of projectDetails" (click)="projectsDetails(details)">
+                <mat-expansion-panel-header style="box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.3); min-width:50%; " >
+                    <mat-panel-title fxFlex="grow" > 
 
-                        {{details.description}}
+                        <div  fxFlexAlign="center"  fxLayout="center center"  >
+                            {{details.projectName}}
+                       
+                        </div>
 
-                    </mat-expansion-panel>
-                    <mat-divider></mat-divider>
-                </div>
-            </mat-accordion>
-        </cdk-virtual-scroll-viewport>
-    </mat-list-item>
-</mat-list>
+
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        <div mat-card-avatar [ngStyle]="{'background-image': 'url(' + details.photoUrl + ')', 'background-size': 'cover'  }" ></div>
+
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+                <mat-icon>account_circle</mat-icon>
+                Created :  {{details.creationDate.toDate() | date:'dd-mm-yyyy'}}
+                By: {{details.profileName}}
+
+                {{details.description}}
+
+            </mat-expansion-panel>
+            <mat-divider></mat-divider>
+    </mat-accordion>
+</cdk-virtual-scroll-viewport>

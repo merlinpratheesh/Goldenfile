@@ -1,3 +1,6 @@
+
+
+
 <mat-toolbar color="white">
   <h1 class="SignInbutton">
       StepsWise Tracking Tool
@@ -11,19 +14,17 @@
   Welcome 
 </div>
 
-<div >
-  <firebase-ui fxLayout="column" (signInSuccessWithAuthResult)="successCallback($event)"
-  (signInFailure)="errorCallback($event)"
-  (uiShown)="uiShownCallback()"></firebase-ui>
-</div>
+<firebase-ui fxLayout="column" (signInSuccessWithAuthResult)="successCallback($event)"
+(signInFailure)="errorCallback($event)"
+(uiShown)="uiShownCallback()"></firebase-ui>
+
+
 
   <button class="SignInbutton">
       <fa-icon (click)="logout()" class="fas faSignOutAlt fa-lg" [icon]="['fas', 'sign-out-alt']">
       </fa-icon>
   </button>
 </mat-toolbar>
-
-
 
 
 <mat-grid-list  cols="10" rowHeight="50vh" >
