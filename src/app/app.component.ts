@@ -94,7 +94,7 @@ export class AppComponent implements OnDestroy {
   }
 
   profileRef;
-  keyRef = this.getSections((this.db.doc('projectKey/' + 'React')));
+  keyRef = this.getSections((this.db.doc('projectKey/' + 'DefaultProject')));
   someinfodetails:something={
     profileinfo:undefined,
     key: undefined

@@ -1,13 +1,13 @@
 export const environment = {
   production: true,
   firefirebaseconfig : {
-    apiKey: "AIzaSyCsEjqeMoRO-oMS2rQNOVsxy03a2hyTrBI",
-    authDomain: "taskbook-fc633.firebaseapp.com",
-    projectId: "taskbook-fc633",
-    storageBucket: "taskbook-fc633.appspot.com",
-    messagingSenderId: "169411732288",
-    appId: "1:169411732288:web:86b0228ee2d82cf8fd10a5",
-    measurementId: "G-PEQTWJSMDD"
+    apiKey: "AIzaSyC0FpqFtY-fKAKamtZxLDGg9tGV0Efz83k",
+    authDomain: "taskmanagementproject.firebaseapp.com",
+    projectId: "taskmanagementproject",
+    storageBucket: "taskmanagementproject.appspot.com",
+    messagingSenderId: "325755404242",
+    appId: "1:325755404242:web:e260b4d01c9832b3f0520b",
+    measurementId: "G-TFQJ3VB905"
   }
   
 };
