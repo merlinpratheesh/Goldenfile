@@ -1,4 +1,8 @@
-App.component-
+
+<div *ngIf="(OnlineCheck | async) as onlineReady; else myonlineNotReady">
+    <div fxLayoutAlign="center center" style="height:100vh;">
+      Online
+      App.component-
 {{afAuth?.authState | async | json}}
 
 <button (click)="logout()">Logout</button>
@@ -6,3 +10,11 @@ App.component-
 <firebase-ui (signInSuccessWithAuthResult)="successCallback($event)"
              (signInFailure)="errorCallback($event)"
              (uiShown)="uiShownCallback()"></firebase-ui>
+    </div>
+  </div>
+  <ng-template #myonlineNotReady>
+    <div fxLayoutAlign="center center" style="height:100vh;">
+      Lost Internet Connection!
+    </div>
+  </ng-template>
+
