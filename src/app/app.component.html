@@ -1,6 +1,16 @@
+
+
 <div *ngIf="(OnlineCheck | async) as onlineReady; else myonlineNotReady">
-  <div fxLayoutAlign="center center" style="height:100vh;">
+  <div  style="height:700px; width:700px" >
     Online
+    App.component-
+{{afAuth?.authState | async | json}}
+
+
+    <button (click)="logout()">Logout</button>
+
+    <firebase-ui (signInSuccessWithAuthResult)="successCallback($event)" (signInFailure)="errorCallback($event)"
+      (uiShown)="uiShownCallback()"></firebase-ui>
   </div>
 </div>
 <ng-template #myonlineNotReady>

@@ -1,15 +1,17 @@
-import { Component } from '@angular/core';
-import { BehaviorSubject, Observable, of, Subscription } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
+import { AfterViewInit, Component,OnInit } from '@angular/core';
+import {AngularFireAuth} from '@angular/fire/auth';
+import {FirebaseUISignInFailure, FirebaseUISignInSuccessWithAuthResult, FirebaseuiAngularLibraryService} from 'firebaseui-angular';
+import firebase from 'firebase/app';
 import { UserdataService } from './service/userdata.service';
-
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
+import { map } from 'rxjs/operators';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
-  title = 'OnlineAuthOnetap';
+export class AppComponent implements AfterViewInit {
+
   myonline;
   subjectonline = new BehaviorSubject(undefined);
   getObservableonlineSub: Subscription = new Subscription;
@@ -23,9 +25,11 @@ export class AppComponent {
     return this.subjectonline;
   }
   OnlineCheck: undefined;
-    constructor(
-      public developmentservice: UserdataService)
-  {
+
+  constructor(public afAuth: AngularFireAuth, public developmentservice: UserdataService, public firebaseuiAngularLibraryService: FirebaseuiAngularLibraryService) {
+    this.firebaseuiAngularLibraryService.firebaseUiInstance.disableAutoSignIn();
+
+
     this.myonline = this.getObservableonline(this.developmentservice.isOnline$);
     this.OnlineCheck = this.myonline.pipe(
       map((onlineval: any) => {
@@ -42,5 +46,24 @@ export class AppComponent {
         return (onlineval);
       }));
 
+  }
+    ngAfterViewInit(): void {
+      
+  }
+  successCallback(data: FirebaseUISignInSuccessWithAuthResult) {
+    console.log('successCallback', data);
+
+  }
+
+  errorCallback(data: FirebaseUISignInFailure) {
+    console.warn('errorCallback', data);
+  }
+
+  uiShownCallback() {
+    console.log('UI shown');
+  }
+  
+  logout() {
+    this.afAuth.signOut();
   }
 }
